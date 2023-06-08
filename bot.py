@@ -1,12 +1,14 @@
-import os
-from telegram import Bot, Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater
 
-bot_token = os.getenv('BOT_TOKEN')  # Получаем токен бота из переменных окружения
-
-bot = Bot(token=bot_token)
-updater = Updater(bot=bot)
+updater = Updater(token='6185990036:AAFDoXBODGI9WjYt48aZxAhCf_J3eIYOwAY')    
 dispatcher = updater.dispatcher
+
+def startCommand(bot, update):
+    bot.send_message(chat_id=update.message.chat_id, text='Hello!')
+
+start_command_handler = CommandHandler('start', startCommand)
+updater.start_polling(clean=True)
+updater.idle()
 
 phone_catalog = [
     {'id': 1, 'name': 'iPhone X', 'price': '1000$'},
